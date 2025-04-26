@@ -1,0 +1,26 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "빛의 코드 GPT",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "기본 메시지 응답",
+        "responses": {
+          "200": {
+            "description": "API가 정상 작동하는지 확인합니다.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "빛의 코드가 실행 중입니다."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
