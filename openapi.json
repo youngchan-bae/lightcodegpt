@@ -1,34 +1,32 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "빛의 코드 API",
-    "version": "1.0.0",
-    "description": "빛의 코드 외부 API 스펙 문서"
+    "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://lightcodegpt-api.onrender.com"
+    }
+  ],
   "paths": {
     "/bojeong-oheng": {
       "post": {
-        "summary": "오행 보정 계산",
+        "summary": "이름, 생년월일, 손금 등으로 오행 보정값 계산",
+        "operationId": "post_bojeong_oheng",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BojeongInput"
+                "$ref": "#/components/schemas/InputData"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "성공",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BojeongOutput"
-                }
-              }
-            }
+            "description": "성공적으로 오행 보정 결과를 반환합니다."
           }
         }
       }
@@ -36,31 +34,28 @@
   },
   "components": {
     "schemas": {
-      "BojeongInput": {
+      "InputData": {
         "type": "object",
         "properties": {
-          "name": {"type": "string"},
-          "birth": {"type": "string"},
-          "birth_time": {"type": "string"},
-          "calendar": {"type": "string"},
-          "zodiac": {"type": "string"}
-        },
-        "required": ["name", "birth", "birth_time", "calendar", "zodiac"]
-      },
-      "BojeongOutput": {
-        "type": "object",
-        "properties": {
-          "final_oheng": {
+          "name": { "type": "string" },
+          "hanja_name": { "type": "string" },
+          "birth": { "type": "string" },
+          "calendar": { "type": "string" },
+          "birth_time": { "type": "string" },
+          "birth_place": { "type": "string" },
+          "gender": { "type": "string" },
+          "zodiac": { "type": "string" },
+          "palm_lines": {
             "type": "object",
             "properties": {
-              "목": {"type": "number"},
-              "화": {"type": "number"},
-              "토": {"type": "number"},
-              "금": {"type": "number"},
-              "수": {"type": "number"}
+              "life_line": { "type": "string" },
+              "fate_line": { "type": "string" },
+              "emotion_line": { "type": "string" },
+              "head_line": { "type": "string" },
+              "marriage_line": { "type": "string" },
+              "money_line": { "type": "string" }
             }
-          },
-          "explanation": {"type": "string"}
+          }
         }
       }
     }
