@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "FastAPI",
-    "version": "0.1.0"
+    "title": "빛의 코드 GPT",
+    "version": "1.0.0"
   },
   "servers": [
     {
@@ -10,19 +10,58 @@
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "summary": "Root",
-        "operationId": "root__get",
+    "/bojeong-oheng": {
+      "post": {
+        "summary": "오행 보정값 계산",
+        "operationId": "post_bojeong_oheng",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InputData"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "오행 계산 결과",
             "content": {
               "application/json": {
                 "schema": {}
               }
             }
           }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PalmLines": {
+        "type": "object",
+        "properties": {
+          "life_line": { "type": "string" },
+          "fate_line": { "type": "string" },
+          "emotion_line": { "type": "string" },
+          "head_line": { "type": "string" },
+          "marriage_line": { "type": "string" },
+          "money_line": { "type": "string" }
+        }
+      },
+      "InputData": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "hanja_name": { "type": "string" },
+          "birth": { "type": "string" },
+          "calendar": { "type": "string" },
+          "birth_time": { "type": "string" },
+          "birth_place": { "type": "string" },
+          "gender": { "type": "string" },
+          "zodiac": { "type": "string" },
+          "palm_lines": { "$ref": "#/components/schemas/PalmLines" }
         }
       }
     }
