@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "빛의 코드 API",
+    "version": "1.0.0",
+    "description": "빛의 코드 외부 API 스펙 문서"
+  },
+  "paths": {
+    "/bojeong-oheng": {
+      "post": {
+        "summary": "오행 보정 계산",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BojeongInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BojeongOutput"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BojeongInput": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "birth": {"type": "string"},
+          "birth_time": {"type": "string"},
+          "calendar": {"type": "string"},
+          "zodiac": {"type": "string"}
+        },
+        "required": ["name", "birth", "birth_time", "calendar", "zodiac"]
+      },
+      "BojeongOutput": {
+        "type": "object",
+        "properties": {
+          "final_oheng": {
+            "type": "object",
+            "properties": {
+              "목": {"type": "number"},
+              "화": {"type": "number"},
+              "토": {"type": "number"},
+              "금": {"type": "number"},
+              "수": {"type": "number"}
+            }
+          },
+          "explanation": {"type": "string"}
+        }
+      }
+    }
+  }
+}
