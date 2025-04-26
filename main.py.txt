@@ -10,3 +10,4 @@ from fastapi.responses import FileResponse
 @app.get("/openapi.json")
 def get_openapi_json():
     return FileResponse("openapi.json", media_type="application/json")
+Add /openapi.json endpoint
