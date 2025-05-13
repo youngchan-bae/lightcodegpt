@@ -2,7 +2,8 @@
 # 빛의 코드 GPT - 메인 실행 서버
 
 from fastapi import FastAPI
-from lightcode_api_blueprint import app as lightcode_app
+from lightcode_api_blueprint import app = FastAPI()
+p as lightcode_app
 
 app = FastAPI()
 
