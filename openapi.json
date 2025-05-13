@@ -1,19 +1,15 @@
-
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "빛의 코드 GPT",
-    "version": "1.0.0"
+    "title": "빛의 코드 GPT API",
+    "version": "1.0.0",
+    "description": "이 API는 전통 사주 + 이름 + 손금 + 별자리를 기반으로 오행 보정값을 계산하고, 통합된 파동 리딩 데이터를 반환합니다."
   },
-  "servers": [
-    {
-      "url": "https://lightcodegpt-api.onrender.com"
-    }
-  ],
   "paths": {
     "/bojeong-oheng": {
       "post": {
-        "summary": "오행 보정값 계산",
+        "summary": "오행 보정 계산",
+        "description": "이름, 손금, 별자리 정보를 입력받아 보정된 오행값과 설명을 반환합니다.",
         "operationId": "post_bojeong_oheng",
         "requestBody": {
           "required": true,
@@ -27,10 +23,12 @@
         },
         "responses": {
           "200": {
-            "description": "오행 계산 결과",
+            "description": "보정된 오행값 결과",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/BojeongOhengResponse"
+                }
               }
             }
           }
@@ -56,13 +54,34 @@
         "properties": {
           "name": { "type": "string" },
           "hanja_name": { "type": "string" },
-          "birth": { "type": "string" },
+          "birth": { "type": "string", "format": "date" },
           "calendar": { "type": "string" },
           "birth_time": { "type": "string" },
           "birth_place": { "type": "string" },
           "gender": { "type": "string" },
           "zodiac": { "type": "string" },
           "palm_lines": { "$ref": "#/components/schemas/PalmLines" }
+        }
+      },
+      "BojeongOhengResponse": {
+        "type": "object",
+        "properties": {
+          "base_oheng": {
+            "type": "object",
+            "additionalProperties": { "type": "number" }
+          },
+          "bojeong_oheng": {
+            "type": "object",
+            "additionalProperties": { "type": "number" }
+          },
+          "final_oheng": {
+            "type": "object",
+            "additionalProperties": { "type": "number" }
+          },
+          "explanation": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
         }
       }
     }
