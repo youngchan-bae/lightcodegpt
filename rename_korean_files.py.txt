@@ -1,0 +1,35 @@
+import os
+import unicodedata
+
+def slugify(value):
+    # 한글 → 유니코드 기반 알파벳화
+    value = unicodedata.normalize('NFKD', value)
+    value = value.encode('ascii', 'ignore').decode('ascii')
+    value = value.lower()
+    value = value.replace(" ", "_")
+    return value
+
+def rename_files_in_folder(folder_path="."):
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".txt") or filename.endswith(".md.txt"):
+            name_part, ext = os.path.splitext(filename)
+
+            # .md.txt 같은 경우 확장자 정리
+            if ext == ".txt" and name_part.endswith(".md"):
+                name_part = name_part[:-3]
+                ext = ".md"
+
+            # 한글을 알파벳 + 언더스코어로 변환
+            new_name_part = slugify(name_part)
+            new_filename = f"{new_name_part}{ext}"
+
+            old_path = os.path.join(folder_path, filename)
+            new_path = os.path.join(folder_path, new_filename)
+
+            if old_path != new_path:
+                os.rename(old_path, new_path)
+                print(f"✅ {filename} → {new_filename}")
+
+# 사용 예시
+if __name__ == "__main__":
+    rename_files_in_folder(".")  # 현재 폴더 기준
