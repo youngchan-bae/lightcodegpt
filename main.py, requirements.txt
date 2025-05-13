@@ -8,6 +8,6 @@ app = FastAPI()
 def root():
     return {"message": "빛의 코드가 실행 중입니다."}
 
-# lightcode API 연결
+# 기존 API 라우터 mount
 app.mount("/", lightcode_app)
 
