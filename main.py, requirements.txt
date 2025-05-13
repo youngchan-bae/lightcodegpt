@@ -1,20 +1,11 @@
-# main.py
-# 빛의 코드 GPT - 메인 실행 서버
-
 from fastapi import FastAPI
-from lightcode_api_blueprint import app = FastAPI()
-p as lightcode_app
+from lightcode_api_blueprint import app as lightcode_app
 
 app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "🌟 빛의 코드 GPT API 서버가 실행 중입니다."}
+    return {"message": "빛의 코드가 실행 중입니다."}
 
-# 서브 API 연결
-app.mount("/api", lightcode_app)
-
-# 향후 확장 (예정)
-# - /status 상태 체크
-# - /version 버전 정보
-# - /docs 문서 자동화 연결 등
+# API 블루프린트 연결
+app.mount("/", lightcode_app)
